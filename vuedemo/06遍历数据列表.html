@@ -10,20 +10,24 @@
 
 <body>
     <div id="app">
-        <ul>
-            <li v-for=" n in 10">{{n}}</li>
-        </ul>
-
-        <ol>
-            <li v-for=" (n,index) in 10">n:{{n}}-index:{{index}}</li>
-        </ol>
+        <table>
+            <tr v-for="user in userList">
+                <td>{{user.id}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.age}}</td>
+            </tr>
+        </table>
     </div>
     <script src="vue.min.js"></script>
     <script>
         new Vue({
             el: '#app',
             data: {
-                
+                userList: [
+                    { id: 1, username: "aaron", age: 20 },
+                    { id: 2, username: "aaron2", age: 22 },
+                    { id: 3, username: "aaron3", age: 23 }
+                ]
             }
         })
     </script>

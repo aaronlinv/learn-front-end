@@ -10,15 +10,11 @@
 
 <body>
     <div id="app">
-        <ul>
-            <li v-for=" n in 10">{{n}}</li>
-        </ul>
-
-        <ol>
-            <li v-for=" (n,index) in 10">n:{{n}}-index:{{index}}</li>
-        </ol>
+        <Navbar></Navbar>
     </div>
     <script src="vue.min.js"></script>
+    <script src="components/Navbar.js"></script>
+    
     <script>
         new Vue({
             el: '#app',
