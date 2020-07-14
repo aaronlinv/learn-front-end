@@ -1,0 +1,14 @@
+<script>
+    {
+        var a = 10
+        let b = 10
+    }
+    console.log(a)
+    console.log(b)   // Uncaught ReferenceError: b is not defined
+    
+    // let 有局部作用域 只能声明一次
+let c = 10
+let c = 10
+console.log(c)
+
+</script>
