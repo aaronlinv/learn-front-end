@@ -70,8 +70,26 @@ export default {
           
     },
     saveOrUpdate(){
-      // 添加
-      this.saveTeacher()
+      // 判断是修改还是添加
+      // 根据是否有id
+      if(!this.teacher.id){
+        // 添加
+        this.saveTeacher()
+      }else{
+        this.updateTeacher()
+      }
+    },
+    updateTeacher(){
+      teacherApi.updateTeacherInfo(this.teacher)
+        .then(response => {
+        // 1. 提示成功
+          this.$message({
+              type: 'success',
+              message: '修改成功!'
+          });
+          // 2.回到列表页 路由跳转
+          this.$router.push({path:'/teacher/table'})
+        })
     },
     saveTeacher(){
         teacherApi.addTeacher(this.teacher)
