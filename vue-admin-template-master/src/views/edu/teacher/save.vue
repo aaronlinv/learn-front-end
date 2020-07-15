@@ -52,8 +52,14 @@ export default {
       saveBtnDisabled:false
     }
   },
-  created(){
-
+  created() {
+    // 判断路径是否有id值
+    console.log('created')
+    if (this.$route.params && this.$route.params.id) {
+      const id = this.$route.params.id
+      // 根据id值查询讲师
+      this.getInfo(id)
+    }
   },
   methods:{
     getInfo(id){
