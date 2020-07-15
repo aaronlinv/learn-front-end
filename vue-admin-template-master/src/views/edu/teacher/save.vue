@@ -46,7 +46,7 @@
                         :width="300"
                         :height="300"
                         :key="imagecropperKey"
-                        :url="BASE_API+'/admin/oss/file/upload'"
+                        :url="BASE_API+'/eduoss/fileoss'"
                         field="file"
                         @close="close"
                         @crop-upload-success="cropSuccess"/>
@@ -65,7 +65,10 @@
 
 <script>
 import teacherApi from '@/api/edu/teacher'
+import ImageCropper from '@/components/ImageCropper'
+import PanThumb from '@/components/PanThumb'
 export default {
+  components: { ImageCropper, PanThumb },
   data(){
     return {
       // 不加属性也可
@@ -77,6 +80,11 @@ export default {
         intro: '',
         avatar: ''
       },
+      // 上传弹窗是否显示
+      imagecropperShow:false,
+      // 上传组件唯一标识key值
+      imagecropperKey:0,
+      BASE_API: process.env.BASE_API, // 接口API地址
       // 提交后 禁用保存按钮
       saveBtnDisabled:false
     }
@@ -92,6 +100,17 @@ export default {
     
   },
   methods:{
+    close(){// 关闭上传弹窗
+      this.imagecropperShow=false
+    },
+    cropSuccess(data){// 上传成功方法
+      // 关闭弹窗
+      this.imagecropperShow=false
+
+      // 接收上传后的地址
+      this.teacher.avatar = data.url 
+
+    },
     init(){
       // 判断路径是否有id值
       console.log('created')
