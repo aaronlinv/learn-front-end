@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import teacherApi from '@/api/edu/teacher'
 export default {
   data(){
     return {
@@ -60,7 +61,16 @@ export default {
       this.saveTeacher()
     },
     saveTeacher(){
-      
+        teacherApi.addTeacher(this.teacher)
+        .then(repsonse =>{
+          // 1. 提示成功
+          this.$message({
+              type: 'success',
+              message: '添加成功!'
+          });
+          // 2.回到列表页 路由跳转
+          this.$router.push({path:'/teacher/table'})
+        })
     }
   }
 }
