@@ -3,6 +3,8 @@
     讲师列表
 
 <!-- 表格 -->
+<!--  :data="list" -->
+<!-- === 判断类型 和值 -->
     <el-table
       v-loading="listLoading"
       :data="list"
