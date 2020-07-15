@@ -33,3 +33,35 @@
     </el-form>
   </div>
 </template>
+
+<script>
+export default {
+  data(){
+    return {
+      // 不加属性也可
+    teacher:{
+        name: '',
+        sort: 0,
+        level: 1,
+        career: '',
+        intro: '',
+        avatar: ''
+      },
+      // 提交后 禁用保存按钮
+      saveBtnDisabled:false
+    }
+  },
+  created(){
+
+  },
+  methods:{
+    saveOrUpdate(){
+      // 添加
+      this.saveTeacher()
+    },
+    saveTeacher(){
+      
+    }
+  }
+}
+</script>
