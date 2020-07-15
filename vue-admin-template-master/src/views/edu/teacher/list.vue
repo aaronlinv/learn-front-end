@@ -47,6 +47,19 @@
     </el-table>
 
 
+   <!-- 分页 -->
+   <!-- :  v-bind 单向绑定 -->
+   <!-- @ v-on -->
+   <!-- current-change 中写getList 每次会自动传入page 自动封装了page -->
+    <el-pagination
+      :current-page="page"
+      :page-size="limit"
+      :total="total"
+      style="padding: 30px 0; text-align: center;"
+      layout="total, prev, pager, next, jumper"
+      @current-change="getList"
+    />
+
   </div>
 </template>
 
@@ -68,7 +81,7 @@ export default {
             list: null,
 
             page: 1,
-            limit: 10,
+            limit: 3,
             // 总记录数
             total: 0,
 
@@ -83,7 +96,10 @@ export default {
     },
     methods:{ // 2.创建具体方法，调用teacher.js定义的方法
         // 讲师列表
-        getList(){
+        // page 默认值1 
+        getList(page = 1){
+            this.page = page
+
             teacher.getTeacherListPage(this.page,this.limit,this.teacherQuery)
             .then(response => {
                 // console.log(response)
