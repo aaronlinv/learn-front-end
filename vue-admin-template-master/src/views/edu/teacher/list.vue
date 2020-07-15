@@ -147,6 +147,12 @@ export default {
             .catch(error => {
                 console.log(error)
             })
+        },
+        resetData(){ // 清空表单
+            // 1.表单内容清空
+            this.teacherQuery = {}
+            // 2. 查询所有讲师信息
+            this.getList()
         }
     }
 
