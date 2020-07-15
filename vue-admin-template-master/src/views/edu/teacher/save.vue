@@ -56,6 +56,13 @@ export default {
 
   },
   methods:{
+    getInfo(id){
+        teacherApi.getTeacherInfo(id)
+          .then(repsonse => {
+            this.teacher = repsonse.data.teacher
+          })
+          
+    },
     saveOrUpdate(){
       // 添加
       this.saveTeacher()
