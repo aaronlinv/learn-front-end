@@ -53,15 +53,29 @@ export default {
     }
   },
   created() {
-    // 判断路径是否有id值
-    console.log('created')
-    if (this.$route.params && this.$route.params.id) {
-      const id = this.$route.params.id
-      // 根据id值查询讲师
-      this.getInfo(id)
+    this.init()
+  },
+  watch:{ // 监听
+  
+    $route(to,from){// 路由发生变化，方法就会执行
+      this.init()
     }
+    
   },
   methods:{
+    init(){
+      // 判断路径是否有id值
+      console.log('created')
+      if (this.$route.params && this.$route.params.id) {
+        const id = this.$route.params.id
+        // 根据id值查询讲师
+        this.getInfo(id)
+      }else{
+        // bug 	点了编辑时候，显示数据，再点击添加，数据还存在
+        // 清空表单数据
+        this.teacher = {}
+      } 
+    },
     getInfo(id){
         teacherApi.getTeacherInfo(id)
           .then(repsonse => {
