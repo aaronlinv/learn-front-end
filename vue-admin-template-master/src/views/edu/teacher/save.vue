@@ -102,10 +102,16 @@ export default {
   methods:{
     close(){// 关闭上传弹窗
       this.imagecropperShow=false
+      // 初始化弹窗 避免上传了头像再点上传，窗口提示上传成功
+      this.imagecropperKey = this.imagecropperKey +1
+
+
     },
     cropSuccess(data){// 上传成功方法
       // 关闭弹窗
       this.imagecropperShow=false
+      // 初始化弹窗 避免上传了头像再点上传，窗口提示上传成功
+      this.imagecropperKey = this.imagecropperKey +1
 
       // 接收上传后的地址
       this.teacher.avatar = data.url 
