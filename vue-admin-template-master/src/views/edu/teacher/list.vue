@@ -1,16 +1,16 @@
 <template>
   <div class="app-container">
     讲师列表
-  <!--查询表单-->
+    <!--查询表单-->
     <el-form :inline="true" class="demo-form-inline">
       <el-form-item>
-        <el-input v-model="teacherQuery.name" placeholder="讲师名"/>
+        <el-input v-model="teacherQuery.name" placeholder="讲师名" />
       </el-form-item>
 
       <el-form-item>
         <el-select v-model="teacherQuery.level" clearable placeholder="讲师头衔">
-          <el-option :value="1" label="高级讲师"/>
-          <el-option :value="2" label="首席讲师"/>
+          <el-option :value="1" label="高级讲师" />
+          <el-option :value="2" label="首席讲师" />
         </el-select>
       </el-form-item>
 
@@ -37,38 +37,30 @@
       <el-button type="default" @click="resetData()">清空</el-button>
     </el-form>
 
-
-<!-- 表格 -->
-<!--  :data="list" -->
-<!-- === 判断类型 和值 -->
+    <!-- 表格 -->
+    <!--  :data="list" -->
+    <!-- === 判断类型 和值 -->
     <el-table
       v-loading="listLoading"
       :data="list"
       element-loading-text="数据加载中"
       border
       fit
-      highlight-current-row>
-
-      <el-table-column
-        label="序号"
-        width="70"
-        align="center">
-        <template slot-scope="scope">
-          {{ (page - 1) * limit + scope.$index + 1 }}
-        </template>
+      highlight-current-row
+    >
+      <el-table-column label="序号" width="70" align="center">
+        <template slot-scope="scope">{{ (page - 1) * limit + scope.$index + 1 }}</template>
       </el-table-column>
 
       <el-table-column prop="name" label="名称" width="80" />
 
       <el-table-column label="头衔" width="80">
-        <template slot-scope="scope">
-          {{ scope.row.level===1?'高级讲师':'首席讲师' }}
-        </template>
+        <template slot-scope="scope">{{ scope.row.level===1?'高级讲师':'首席讲师' }}</template>
       </el-table-column>
 
       <el-table-column prop="intro" label="资历" />
 
-      <el-table-column prop="gmtCreate" label="添加时间" width="160"/>
+      <el-table-column prop="gmtCreate" label="添加时间" width="160" />
 
       <el-table-column prop="sort" label="排序" width="60" />
 
@@ -78,16 +70,20 @@
             <el-button type="primary" size="mini" icon="el-icon-edit">修改</el-button>
           </router-link>
           <!-- scope.row.id 传递讲师id -->
-          <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope.row.id)">删除</el-button>
+          <el-button
+            type="danger"
+            size="mini"
+            icon="el-icon-delete"
+            @click="removeDataById(scope.row.id)"
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-
-   <!-- 分页 -->
-   <!-- :  v-bind 单向绑定 -->
-   <!-- @ v-on -->
-   <!-- current-change 中写getList 每次会自动传入page 自动封装了page -->
+    <!-- 分页 -->
+    <!-- :  v-bind 单向绑定 -->
+    <!-- @ v-on -->
+    <!-- current-change 中写getList 每次会自动传入page 自动封装了page -->
     <el-pagination
       :current-page="page"
       :page-size="limit"
@@ -96,7 +92,6 @@
       layout="total, prev, pager, next, jumper"
       @current-change="getList"
     />
-
   </div>
 </template>
 
@@ -156,10 +151,31 @@ export default {
             this.getList()
         },
         removeDataById(id){ // 删除讲师
-            // 先测试一下
-            alert(id)
+            // 删除提示
+            this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+                }).then(() => {
+                    // 先测试一下
+                    // alert(id)
+                    teacher.deleteTeacherId(id)
+                    .then(response =>{
+                        // 1.提示
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                        // 2.回到列表，需要刷新
+                        this.getList()
+                    })
+            })
 
 
+
+            // .catch(error =>{
+            //     console.log(error);
+            // })
         }
     }
 

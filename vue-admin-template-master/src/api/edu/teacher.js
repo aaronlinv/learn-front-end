@@ -13,5 +13,12 @@ export default {
             // data表示把对象转换成json 进行传递
             data: teacherQuery
         })
+    },
+    // 删除讲师
+    deleteTeacherId(id){
+        return request({
+            url: `/eduservice/teacher/${id}`,
+            method: 'delete'
+        })
     }
 }
