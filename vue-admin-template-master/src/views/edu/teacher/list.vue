@@ -77,6 +77,7 @@
           <router-link :to="'/edu/teacher/edit/'+scope.row.id">
             <el-button type="primary" size="mini" icon="el-icon-edit">修改</el-button>
           </router-link>
+          <!-- scope.row.id 传递讲师id -->
           <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
@@ -153,6 +154,12 @@ export default {
             this.teacherQuery = {}
             // 2. 查询所有讲师信息
             this.getList()
+        },
+        removeDataById(id){ // 删除讲师
+            // 先测试一下
+            alert(id)
+
+
         }
     }
 
