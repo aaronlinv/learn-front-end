@@ -21,6 +21,22 @@
 
   <!-- 课程讲师 TODO -->
 
+    <!-- 课程讲师 -->
+    <el-form-item label="课程讲师">
+    <el-select
+        v-model="courseInfo.teacherId"
+        placeholder="请选择">
+        <el-option
+        v-for="teacher in teacherList"
+        :key="teacher.id"
+        :label="teacher.name"
+        :value="teacher.id"/>
+    </el-select>
+    </el-form-item>
+
+
+
+
   <el-form-item label="总课时">
     <el-input-number :min="0" v-model="courseInfo.lessonNum" controls-position="right" placeholder="请填写课程的总课时数"/>
   </el-form-item>
@@ -54,19 +70,31 @@ export default {
             // courseInfo 添加了这个表单效果才会显示，里面属性不写也可
             courseInfo:{
                 title: '',
-                subjectId: '',
+                subjectId: '', // 二级分类id
+                subjectParentId:'',// 一级分类id
                 teacherId: '',
                 lessonNum: 0,
                 description: '',
                 cover: '',
                 price: 0
-            }
+            },
+            // 讲师列表 封装所有讲师
+            teacherList:[]
+
         }
     },
     created(){
-
+        // 初始化所有讲师
+        this.getListTeacher()
     },
     methods:{
+        // 查询所有讲师
+        getListTeacher(){
+            course.getListTeacher()
+                .then(response => {
+                    this.teacherList = response.data.items
+                })
+        },
         next(){
             course.addCourseInfo(this.courseInfo)
                 .then(response => {
