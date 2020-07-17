@@ -30,7 +30,21 @@
         :label="subject.title"
         :value="subject.id"/>
     </el-select>
+
+    <!-- 二级分类 -->
+
+        <el-select
+            v-model="courseInfo.subjectId"
+            placeholder="二级分类">
+            <el-option
+            v-for="subject in subjectTwoList"
+            :key="subject.id"
+            :label="subject.title"
+            :value="subject.id"/>
+        </el-select>
     </el-form-item>
+    
+
 
 
   <!-- 课程讲师 TODO -->
