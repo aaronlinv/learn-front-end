@@ -18,6 +18,20 @@
   </el-form-item>
 
   <!-- 所属分类 TODO -->
+    
+    <!-- 一级分类 -->
+    <el-form-item label="课程分类">
+    <el-select
+        v-model="courseInfo.subjectParentId"
+        placeholder="一级分类">
+        <el-option
+        v-for="subject in subjectOneList"
+        :key="subject.id"
+        :label="subject.title"
+        :value="subject.id"/>
+    </el-select>
+    </el-form-item>
+
 
   <!-- 课程讲师 TODO -->
 
@@ -62,6 +76,7 @@
 
 <script>
 import course from "@/api/edu/course"
+import subject from "@/api/edu/subject"
 
 export default {
     data(){
@@ -79,15 +94,30 @@ export default {
                 price: 0
             },
             // 讲师列表 封装所有讲师
-            teacherList:[]
+            teacherList:[],
+
+            // 一级分类
+            subjectOneList:[],
+            // 二级分类
+            subjectTwoList:[]
 
         }
     },
     created(){
         // 初始化所有讲师
         this.getListTeacher()
+        // 初始化一级分类
+        this.getOneSubject()
     },
     methods:{
+        // 查询所有一级分类
+        getOneSubject(){
+            subject.getSubjectList()
+                .then(response => {
+                    this.subjectOneList = response.data.list
+                })
+        },
+
         // 查询所有讲师
         getListTeacher(){
             course.getListTeacher()
