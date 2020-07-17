@@ -135,6 +135,9 @@ export default {
                 if(value ==oneSubject.id ){
                     // 获取对应二级分类
                     this.subjectTwoList =  oneSubject.children
+                    // 切换一级分类 清空二级分类显示
+                    //  v-model="courseInfo.subjectId"
+                    this.courseInfo.subjectId = ''
                 }
 
             }
