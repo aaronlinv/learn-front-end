@@ -23,7 +23,7 @@
     <el-form-item label="课程分类">
     <el-select
         v-model="courseInfo.subjectParentId"
-        placeholder="一级分类">
+        placeholder="一级分类" @change="subjectLevelOneChanged">
         <el-option
         v-for="subject in subjectOneList"
         :key="subject.id"
@@ -124,6 +124,24 @@ export default {
         this.getOneSubject()
     },
     methods:{
+        // 点击一级分类 触发change 显示对应二级分类
+        subjectLevelOneChanged(value){
+            // value 就是一级分类id值
+            // alert(value)
+
+            for(var i =0 ;i<this.subjectOneList.length;i++){
+                var oneSubject =  this.subjectOneList[i];
+
+                if(value ==oneSubject.id ){
+                    // 获取对应二级分类
+                    this.subjectTwoList =  oneSubject.children
+                }
+
+            }
+
+        },
+
+
         // 查询所有一级分类
         getOneSubject(){
             subject.getSubjectList()
