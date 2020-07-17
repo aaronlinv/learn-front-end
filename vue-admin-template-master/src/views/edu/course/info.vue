@@ -76,7 +76,8 @@ export default {
                             type: 'success',
                             message: '添加课程信息成功!'});
                     // 跳转下一步
-                    this.$router.push({path:'/course/chapter/1'})
+                    // 后端response 返回id
+                    this.$router.push({path:`/course/chapter/${response.data.courseId}`})
                 })
             
         }
