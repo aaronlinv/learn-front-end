@@ -74,6 +74,7 @@ export default {
                     message: response.message
                 })
                 // 路由跳转到课程分类界面
+                this.$router.push({path:'/subject/list'})
     } 
         },
         // 上传失败
