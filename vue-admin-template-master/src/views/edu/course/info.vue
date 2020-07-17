@@ -48,7 +48,17 @@
 export default {
     data(){
         return {
-            saveBtndisabled:false
+            saveBtndisabled:false,
+            // courseInfo 添加了这个表单效果才会显示，里面属性不写也可
+            courseInfo:{
+                title: '',
+                subjectId: '',
+                teacherId: '',
+                lessonNum: 0,
+                description: '',
+                cover: '',
+                price: 0
+            }
         }
     },
     created(){
