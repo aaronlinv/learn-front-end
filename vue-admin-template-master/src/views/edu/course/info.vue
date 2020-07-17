@@ -27,7 +27,7 @@
 
   <!-- 课程简介 TODO -->
     <el-form-item label="课程简介">
-    <el-input-number :min="0" v-model="courseInfo.description" controls-position="right" placeholder=""/>
+    <el-input v-model="courseInfo.description" placeholder=""/>
   </el-form-item>
 
   <!-- 课程封面 TODO -->
@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import course from "@/api/edu/course"
+
 export default {
     data(){
         return {
@@ -66,7 +68,17 @@ export default {
     },
     methods:{
         next(){
-            this.$router.push({path:'/course/chapter/1'})
+            course.addCourseInfo(this.courseInfo)
+                .then(response => {
+                    // 提示
+                    
+                        this.$message({
+                            type: 'success',
+                            message: '添加课程信息成功!'});
+                    // 跳转下一步
+                    this.$router.push({path:'/course/chapter/1'})
+                })
+            
         }
     }
 }
