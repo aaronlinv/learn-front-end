@@ -76,6 +76,24 @@
 
   <!-- 课程封面 TODO -->
 
+
+<!-- 课程封面-->
+<el-form-item label="课程封面">
+    <!-- show-file-list 不显示上传列表 -->
+  <el-upload
+  
+    :show-file-list="false"
+    :on-success="handleAvatarSuccess"
+    :before-upload="beforeAvatarUpload"
+    :action="BASE_API+'/eduoss/fileoss'"
+    class="avatar-uploader">
+    <img :src="courseInfo.cover">
+  </el-upload>
+
+</el-form-item>
+
+
+
   <el-form-item label="课程价格">
     <el-input-number :min="0" v-model="courseInfo.price" controls-position="right" placeholder="免费课程请设置为0元"/> 元
   </el-form-item>
@@ -104,7 +122,7 @@ export default {
                 teacherId: '',
                 lessonNum: 0,
                 description: '',
-                cover: '',
+                cover: '/static/01.jpeg',
                 price: 0
             },
             // 讲师列表 封装所有讲师
@@ -113,7 +131,8 @@ export default {
             // 一级分类
             subjectOneList:[],
             // 二级分类
-            subjectTwoList:[]
+            subjectTwoList:[],
+            BASE_API: process.env.BASE_API // 接口API地址
 
         }
     },
@@ -124,6 +143,28 @@ export default {
         this.getOneSubject()
     },
     methods:{
+        // 上传成功
+        handleAvatarSuccess(res, file){
+        console.log(res)// 上传响应
+        console.log(URL.createObjectURL(file.raw)) // base64编码
+        
+        // courseInfo.cover 封面的src
+        this.courseInfo.cover = res.data.url
+
+        },
+        // 上传之前调用方法
+        beforeAvatarUpload(file){
+            const isJPG = file.type === 'image/jpeg'
+            const isLt2M = file.size / 1024 / 1024 < 2
+
+            if (!isJPG) {
+                this.$message.error('上传头像图片只能是 JPG 格式!')
+            }
+            if (!isLt2M) {
+                this.$message.error('上传头像图片大小不能超过 2MB!')
+            }
+            return isJPG && isLt2M
+        },
         // 点击一级分类 触发change 显示对应二级分类
         subjectLevelOneChanged(value){
             // value 就是一级分类id值
