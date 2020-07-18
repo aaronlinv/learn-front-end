@@ -100,7 +100,7 @@
   </el-form-item>
 
   <el-form-item>
-    <el-button :disabled="saveBtnDisabled" type="primary" @click="next">保存并下一步</el-button>
+    <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">保存并下一步</el-button>
   </el-form-item>
 </el-form>
 
@@ -256,7 +256,8 @@ export default {
                     this.teacherList = response.data.items
                 })
         },
-        next(){
+        // 添加课程
+        addCourse(){
             course.addCourseInfo(this.courseInfo)
                 .then(response => {
                     // 提示
@@ -268,8 +269,35 @@ export default {
                     // 后端response 返回id
                     this.$router.push({path:`/course/chapter/${response.data.courseId}`})
                 })
+          
+        },
+        
+        // 修改课程
+        updateCourse(){
+            course.updateCourseInfo(this.courseInfo)
+                .then(response =>{
+                     this.$message({
+                            type: 'success',
+                            message: '修改课程信息成功!'});
+                    // 跳转下一步
+                    // 修改后端不会返回id 注意
+                    this.$router.push({path:`/course/chapter/${this.courseId}`})
+                })
             
-        }
+        },
+        // 点击下一步 添加或者修改
+        saveOrUpdate(){
+            if(!this.courseInfo.id){
+                // 添加
+                this.addCourse()
+
+            }else{
+                // 修改
+                this.updateCourse()
+
+            }
+
+        }  
     }
 }
 </script>
