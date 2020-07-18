@@ -139,17 +139,32 @@ export default {
             subjectOneList:[],
             // 二级分类
             subjectTwoList:[],
-            BASE_API: process.env.BASE_API // 接口API地址
+            BASE_API: process.env.BASE_API, // 接口API地址
+            courseId:''
 
         }
     },
     created(){
+        // 路由地址存在id
+        if(this.$route.params && this.$route.params.id){
+            this.courseId = this.$route.params.id
+            // 调用方法回显数据
+            this.getInfo()
+
+        }
         // 初始化所有讲师
         this.getListTeacher()
         // 初始化一级分类
         this.getOneSubject()
     },
     methods:{
+        // 根据课程id 查信息
+        getInfo(){
+            course.getCourseInfo(this.courseId)
+                .then(response =>{
+                    this.courseInfo = response.data.courseInfoVo
+                })
+        },
         // 上传成功
         handleAvatarSuccess(res, file){
         console.log(res)// 上传响应
