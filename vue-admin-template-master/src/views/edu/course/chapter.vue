@@ -138,8 +138,26 @@ export default {
 
           })
     },
+    // 修改章节
+    updateChapter(){
+        chapter.updateChapter(this.chapter)
+        
+          .then(response =>{
+            this.dialogChapterFormVisible=false
+            this.$message({
+              type: 'success',
+              message: '修改章节信息成功!'})
+            this.getChapterVideo()
+          })
+    },
+
     saveOrUpdate(){
+      //
+      if(!this.chapter.id){
         this.addChapter()
+      }else{
+        this.updateChapter()
+      }
     },
     // 根据课程id查询章节和小节
     getChapterVideo(){
