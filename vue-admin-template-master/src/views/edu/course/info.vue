@@ -150,12 +150,45 @@ export default {
             this.courseId = this.$route.params.id
             // 调用方法回显数据
             this.getInfo()
+            
+            
+            // 查询所有分类包括一级分类和二级分类
+            subject.getSubjectList()
+                .then(response => {
+                    
+                    //获取一级分类
+                    this.subjectOneList =  response.data.list
+                    console.log(this.subjectOneList)
+
+                    // 遍历一级分类，取对应一级分类的二级分类
+
+                    for(var i = 0;i<this.subjectOneList.length;i++){
+                        
+                        var oneSubject = this.subjectOneList[i]
+
+                        console.log(i)
+
+                        
+                        if(this.courseInfo.subjectParentId == oneSubject.id){
+                            // 获取二级
+                             this.subjectTwoList = oneSubject.children
+                             console.log(this.subjectTwoList);
+
+                        }else{
+                             console.log("没有匹配到");
+                        }
+                    }
+                })
+                        // 初始化所有讲师
+            this.getListTeacher()
+        }else{
+            // 初始化所有讲师
+            this.getListTeacher()
+            // 初始化一级分类
+            this.getOneSubject()
 
         }
-        // 初始化所有讲师
-        this.getListTeacher()
-        // 初始化一级分类
-        this.getOneSubject()
+        
     },
     methods:{
         // 根据课程id 查信息
