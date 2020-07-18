@@ -21,19 +21,39 @@
 </template>
 
 <script>
-
+import chapter from "@/api/edu/chapter";
 export default {
   data() {
     return {
-      saveBtnDisabled: false // 保存按钮是否禁用
+      saveBtnDisabled: false, // 保存按钮是否禁用
+      chapterVideoList:[],
+      courseId:''
     }
   },
 
   created() {
     console.log('chapter created')
+    // 获取路由的 课程 id值
+    // 有值
+    if(this.$route.params && this.$route.params.id){
+        this.courseId = this.$route.params.id
+        // 根据课程id查询章节和小节
+         this.getChapterVideo()
+    }
+  
+    
   },
 
   methods: {
+    // 根据课程id查询章节和小节
+    getChapterVideo(){
+        chapter.getAllChapterVideo(this.courseId)
+          .then(response => {
+              this.chapterVideoList = response.data.allChapterVideo
+          })
+    },
+
+
     previous() {
       console.log('previous')
       this.$router.push({ path: '/course/info/1' })
