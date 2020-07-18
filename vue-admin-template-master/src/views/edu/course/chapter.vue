@@ -110,8 +110,9 @@ export default {
         this.chapter.title =''
         this.chapter.sort = 0
     },
-    saveOrUpdate(){
-        chapter.addChapter(this.chapter)
+    // 添加章节
+    addChapter(){
+      chapter.addChapter(this.chapter)
           .then(response =>{
             // 设置课程id
             this.chapter.courseId = this.courseId
@@ -124,6 +125,9 @@ export default {
             
 
           })
+    },
+    saveOrUpdate(){
+        this.addChapter()
     },
     // 根据课程id查询章节和小节
     getChapterVideo(){
