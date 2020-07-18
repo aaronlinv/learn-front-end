@@ -10,6 +10,18 @@
       <el-step title="最终发布"/>
     </el-steps>
 
+
+    <ul>
+      <li v-for="chapter in chapterVideoList" :key="chapter.id">
+          {{chapter.title}}
+          <ul>
+            <li v-for="video in chapter.children" :key="video.id">
+              {{video.title}}
+
+            </li>
+          </ul>
+      </li>
+    </ul>
     <el-form label-width="120px">
 
       <el-form-item>
