@@ -11,7 +11,7 @@
     </el-steps>
   
   <!-- 添加课程按钮 -->
-  <el-button type="text" @click="dialogChapterFormVisible=true">添加章节</el-button>
+  <el-button type="text" @click="openChapterDialog()">添加章节</el-button>
 
 
   <ul class="chanpterList">
@@ -102,6 +102,14 @@ export default {
   },
 
   methods: {
+    // 打开添加弹窗
+
+    openChapterDialog(){
+        this.dialogChapterFormVisible =true
+        // 清空数据残留
+        this.chapter.title =''
+        this.chapter.sort = 0
+    },
     saveOrUpdate(){
         chapter.addChapter(this.chapter)
           .then(response =>{
