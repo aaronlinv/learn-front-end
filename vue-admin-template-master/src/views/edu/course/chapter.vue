@@ -81,7 +81,9 @@ export default {
       dialogChapterFormVisible:false, // 章节dialog
       // 封装章节数据
       chapter:{
-
+        courseId:'',
+        title:'',
+        sort:0
       }
     }
   },
@@ -100,6 +102,21 @@ export default {
   },
 
   methods: {
+    saveOrUpdate(){
+        chapter.addChapter(this.chapter)
+          .then(response =>{
+            // 设置课程id
+            this.chapter.courseId = this.courseId
+            // 关闭窗口 提示信息 刷新数据
+            this.dialogChapterFormVisible=false
+            this.$message({
+              type: 'success',
+              message: '添加章节信息成功!'})
+            this.getChapterVideo()
+            
+
+          })
+    },
     // 根据课程id查询章节和小节
     getChapterVideo(){
         chapter.getAllChapterVideo(this.courseId)
