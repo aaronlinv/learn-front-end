@@ -23,7 +23,7 @@
 
             <span class="acts">
                 <el-button style="" type="text" @click="openEditChapter(chapter.id)">编辑</el-button>
-                <el-button type="text">删除</el-button>
+                <el-button type="text" @click="removeChapter(chapter.id)">删除</el-button>
             </span>
           </p>
 
@@ -101,6 +101,29 @@ export default {
   },
 
   methods: {
+    // 删除章节
+    removeChapter(chapterId){
+                  // 删除提示
+            this.$confirm('此操作将删除章节, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+                }).then(() => {
+                    // 先测试一下
+                    // alert(id)
+                    chapter.deleteChapter(chapterId)
+                    .then(response =>{
+                        // 1.提示
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                        // 2.回到列表，需要刷新
+                                 this.getChapterVideo()
+
+                    })
+            })
+    },
     // 修改章节弹窗,数据回显
   openEditChapter(chapterId){
     console.log("openEditChapter")
