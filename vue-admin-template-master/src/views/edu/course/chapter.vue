@@ -21,11 +21,10 @@
           <p>
               {{ chapter.title }}
 
-              <span class="acts">
-                  <el-button type="text">添加课时</el-button>
-                  <el-button style="" type="text">编辑</el-button>
-                  <el-button type="text">删除</el-button>
-              </span>
+            <span class="acts">
+                <el-button style="" type="text" @click="openEditChapter(chapter.id)">编辑</el-button>
+                <el-button type="text">删除</el-button>
+            </span>
           </p>
 
           <!-- 视频 -->
@@ -102,6 +101,19 @@ export default {
   },
 
   methods: {
+    // 修改章节弹窗,数据回显
+  openEditChapter(chapterId){
+    console.log("openEditChapter")
+    this.dialogChapterFormVisible =true
+
+      chapter.getChapter(chapterId)
+        .then(response => {
+          this.chapter = response.data.chapter
+        })
+
+      
+  },
+
     // 打开添加弹窗
 
     openChapterDialog(){
@@ -162,7 +174,7 @@ export default {
   position: relative;
 }
 .chanpterList p{
-  float: left;
+  /* float: left; */
   font-size: 20px;
   margin: 10px 0;
   padding: 10px;
