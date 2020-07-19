@@ -138,7 +138,8 @@ export default {
         title: '',
         sort: 0,
         free: 0,
-        videoSourceId: ''
+        videoSourceId: '',
+        videoOriginalName:'' //上传名称
 
       },
       // Video弹窗
@@ -168,7 +169,10 @@ export default {
     // =========================视频=========================
     // 上传成功
     handleVodUploadSuccess(response, file, fileList){
+        // 赋值获取的视频id
         this.video.videoSourceId = response.data.videoId
+        // 赋值视频名称 file是上传的文件
+        this.video.videoOriginalName = file.name
     },
     // 上传之前
     handleUploadExceed(){
