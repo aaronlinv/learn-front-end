@@ -127,9 +127,28 @@ export default {
     created(){ // 3.页面渲染前执行，一般调用methods方法
         this.getList()
     },
-    methods:{ // 2.创建具体方法，调用teacher.js定义的方法
+    methods:{ 
+        removeDataById(id){
+            this.$confirm('此操作将删除课程, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+                }).then(() => {
+                        course.deleteCourseInfo(id)
+                    .then(response =>{
+                        // 1.提示
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                        // 2.回到列表，需要刷新
+                        this.getList()
+
+                    })
+            })
+        },
+        
         // 讲师列表
-        // page 默认值1 
         getList(){
             course.getListCourse()
             .then(response => {
