@@ -167,6 +167,16 @@ export default {
   methods: {
 
     // =========================视频=========================
+    // 点击确认
+    handleVodRemove(){
+      // 调用接口删除
+      alert("删除")
+    },
+    // 点击×的时候调用
+    beforeVodRemove(file,fileList){
+
+      return this.$confirm(`确定移除${ file.name}?`)
+    },
     // 上传成功
     handleVodUploadSuccess(response, file, fileList){
         // 赋值获取的视频id
