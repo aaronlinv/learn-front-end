@@ -52,5 +52,14 @@ export default {
             method: 'post',
             data:id
         })
+    },
+
+    // 课程列表
+    getListCourse(){
+        return request({
+            url: `/eduservice/course`,
+            method: 'get'
+        })
     }
+    
 }

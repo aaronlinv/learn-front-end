@@ -1,0 +1,155 @@
+<template>
+  <div class="app-container">
+    列表
+    <!--查询表单-->
+    <el-form :inline="true" class="demo-form-inline">
+      <el-form-item>
+        <el-input v-model="courseQuery.name" placeholder="课程名称" />
+      </el-form-item>
+
+      <el-form-item>
+        <el-select v-model="courseQuery.status" clearable placeholder="课程状态">
+          <el-option :value="Normal" label="已发布" />
+          <el-option :value="Draft" label="未发布" />
+        </el-select>
+      </el-form-item>
+
+      <!-- <el-form-item label="添加时间">
+        <el-date-picker
+          v-model="teacherQuery.begin"
+          type="datetime"
+          placeholder="选择开始时间"
+          value-format="yyyy-MM-dd HH:mm:ss"
+          default-time="00:00:00"
+        />
+      </el-form-item>
+      <el-form-item>
+        <el-date-picker
+          v-model="teacherQuery.end"
+          type="datetime"
+          placeholder="选择截止时间"
+          value-format="yyyy-MM-dd HH:mm:ss"
+          default-time="00:00:00"
+        />
+      </el-form-item> -->
+
+      <el-button type="primary" icon="el-icon-search" @click="getList()">查询</el-button>
+      <el-button type="default" @click="resetData()">清空</el-button>
+    </el-form>
+
+    <!-- 表格 -->
+    <!--  :data="list" -->
+    <!-- === 判断类型 和值 -->
+    <el-table
+      v-loading="listLoading"
+      :data="list"
+      element-loading-text="数据加载中"
+      border
+      fit
+      highlight-current-row
+    >
+      <el-table-column label="序号" width="70" align="center">
+        <template slot-scope="scope">{{ (page - 1) * limit + scope.$index + 1 }}</template>
+      </el-table-column>
+
+      <el-table-column prop="title" label="课程名称" width="80" />
+
+      <el-table-column label="课程状态" width="80">
+        <template slot-scope="scope">{{ scope.row.status==='Normal'?'已发布':'未发布' }}</template>
+      </el-table-column>
+
+      <el-table-column prop="lessonNum" label="课时数" />
+
+      <el-table-column prop="gmtCreate" label="添加时间" width="160" />
+
+      <el-table-column prop="viewCount" label="浏览数量" width="60" />
+
+      <el-table-column label="操作" width="200" align="center">
+        <template slot-scope="scope">
+          <router-link :to="'/teacher/edit/'+scope.row.id">
+            <el-button type="primary" size="mini" icon="el-icon-edit">编辑课程基本信息</el-button>
+          </router-link>
+
+        <router-link :to="'/teacher/edit/'+scope.row.id">
+            <el-button type="primary" size="mini" icon="el-icon-edit">编辑课程大纲信息</el-button>
+          </router-link>
+
+          <!-- scope.row.id 传递讲师id -->
+          <el-button type="danger" size="mini" icon="el-icon-delete"
+            @click="removeDataById(scope.row.id)" >删除课程信息</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+
+    <!-- 分页 -->
+    <!-- :  v-bind 单向绑定 -->
+    <!-- @ v-on -->
+    <!-- current-change 中写getList 每次会自动传入page 自动封装了page -->
+    <el-pagination
+      :current-page="page"
+      :page-size="limit"
+      :total="total"
+      style="padding: 30px 0; text-align: center;"
+      layout="total, prev, pager, next, jumper"
+      @current-change="getList"
+    />
+  </div>
+</template>
+
+
+<script>
+// 0.引入tacher.js
+import course from '@/api/edu/course'
+
+export default {
+    // 这种写法是错误的
+    // data:{
+
+    // },
+    // data必须是方法
+
+    data(){ // 1.定义变量和初始值
+        return {
+            // 查询后接口返回list
+            list: null,
+
+            page: 1,
+            limit: 3,
+            // 总记录数
+            total: 0,
+
+            courseQuery: {
+                // 属性可以不定义，上面使用到了会自动添加
+            }
+
+        }
+    },
+    created(){ // 3.页面渲染前执行，一般调用methods方法
+        this.getList()
+    },
+    methods:{ // 2.创建具体方法，调用teacher.js定义的方法
+        // 讲师列表
+        // page 默认值1 
+        getList(){
+            course.getListCourse()
+            .then(response => {
+                
+                this.list = response.data.list
+                
+                
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        },
+        resetData(){ // 清空表单
+            // 1.表单内容清空
+            this.courseQuery = {}
+            // 2. 查询所有讲师信息
+            this.getList()
+        },
+       
+    }
+
+}
+</script>
