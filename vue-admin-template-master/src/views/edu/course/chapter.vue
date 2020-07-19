@@ -36,7 +36,7 @@
                   <p>{{ video.title }}
                       <span class="acts">
                           <el-button type="text">编辑</el-button>
-                          <el-button type="text">删除</el-button>
+                          <el-button type="text" @click="removeViedo(video.id)">删除</el-button>
                       </span>
                   </p>
               </li>
@@ -142,6 +142,28 @@ export default {
 
     // =========================小节=========================
     // 小节弹窗
+    removeViedo(id){
+                        // 删除提示
+            this.$confirm('此操作将删除小节, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+                }).then(() => {
+                    // 先测试一下
+                    // alert(id)
+                    video.deleteVideo(id)
+                    .then(response =>{
+                        // 1.提示
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                        // 2.回到列表，需要刷新
+                        this.getChapterVideo()
+
+                    })
+            })
+    },
     openVideo(chapterId){
         this.dialogVideoFormVisible = true
         // 需要课程id和章节id
@@ -305,7 +327,8 @@ export default {
   padding-left: 50px;
 }
 .videoList p{
-  float: left;
+  /* 需要注释 否者按钮无法点击 */
+  /* float: left; */
   font-size: 14px;
   margin: 10px 0;
   padding: 10px;
