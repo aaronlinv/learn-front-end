@@ -226,6 +226,13 @@ export default {
     },
     openVideo(chapterId){
         this.dialogVideoFormVisible = true
+              // 清空上传文件列表
+              this.fileList = []
+              // 清空video数据
+              this.video.videoSourceId='',
+              this.video.videoOriginalName = ''
+
+
         // 需要课程id和章节id
         
         this.video.chapterId = chapterId
