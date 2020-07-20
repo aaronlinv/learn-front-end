@@ -170,7 +170,19 @@ export default {
     // 点击确认
     handleVodRemove(){
       // 调用接口删除
-      alert("删除")
+      // alert("删除")
+      video.deleteAliyunvod(this.video.videoSourceId)
+        .then(response =>{
+                  this.$message({
+                  type: 'success',
+                  message: '删除视频成功!'
+              });
+              // 清空上传文件列表
+              this.fileList = []
+              // 清空video数据
+              this.video.videoSourceId='',
+              this.video.videoOriginalName = ''
+        })
     },
     // 点击×的时候调用
     beforeVodRemove(file,fileList){
