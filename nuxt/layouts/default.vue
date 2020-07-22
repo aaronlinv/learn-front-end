@@ -165,6 +165,15 @@ export default {
     this.showInfo()
   },
   methods:{
+    // 退出 清空cookie数据
+    logout(){ 
+        cookie.set('guli_token','',{domain:'localhost'})
+        cookie.set('guli_ucenter','',{domain:'localhost'})
+        // 跳转页面 
+        window.location.href = "/";
+    },
+
+
     // 从cookie中获取信息
       showInfo(){
           var userStr = cookie.get('guli_ucenter')
