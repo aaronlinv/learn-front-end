@@ -43,7 +43,8 @@
 <script>
   import '~/assets/css/sign.css'
   import '~/assets/css/iconfont.css'
-//   import cookie from 'js-cookie'
+  import cookie from 'js-cookie'
+  import loginApi from '@/api/login'
 
   export default {
     layout: 'sign',
@@ -59,7 +60,33 @@
     },
 
     methods: {
+      // 登录
+      submitLogin(){
+        // 1.登录获取token
+        loginApi.submitLoginUser(this.user)
+        .then(response =>{
+          // 2.获取token放入cookie
+          // domain:作用范围
+          cookie.set('guli_token',response.data.data.token,{domain:'localhost'})
+          // 3.在request 中写拦截器 将cookie中的token设置到header里
 
+          // 4.调用接口，根据token获取用户信息，为了首页显示
+          loginApi.getLoginUserInfo()
+            .then(response =>{
+              // 获取返回的用户信息，放入cookie
+              this.loginInfo = response.data.data.userInfo
+              console.log("login")
+              console.log(this.loginInfo)
+              // debugger
+              cookie.set('guli_ucenter',this.loginInfo,{domain:'localhost'})
+              // 跳转页面
+                window.location.href = "/";
+            })
+
+
+        })
+
+      },
 
       checkPhone (rule, value, callback) {
         //debugger
