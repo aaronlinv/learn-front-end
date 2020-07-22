@@ -67,7 +67,7 @@
 <script>
   import '~/assets/css/sign.css'
   import '~/assets/css/iconfont.css'
-
+  import registerApi from '@/api/register'
 
   export default {
     layout: 'sign',
@@ -85,7 +85,44 @@
       }
     },
     methods: {
-  
+        // 获取验证码
+        getCodeFun(){
+            registerApi.sendCode(this.params.mobile)
+                .then(response => {
+                    this.sending = false
+                    // 调用倒计时
+                    this.timeDown()
+
+                })
+        },
+        // 注册
+        submitRegister(){
+            registerApi.registerMember(params)
+                .then(response =>{
+                    // 提示成功
+                    this.$message({
+                        type: 'success',
+                        message: "注册成功"
+                    })
+                    // 跳转
+                    this.$router.push({path: '/login'})
+                })
+        },
+        // 验证码倒计时
+        timeDown() {
+        let result = setInterval(() => {
+          --this.second;
+          this.codeTest = this.second
+          if (this.second < 1) {
+            clearInterval(result);
+            this.sending = true;
+            //this.disabled = false;
+            this.second = 60;
+            this.codeTest = "获取验证码"
+          }
+        }, 1000);
+
+      },
       checkPhone (rule, value, callback) {
         //debugger
         if (!(/^1[34578]\d{9}$/.test(value))) {
