@@ -47,18 +47,42 @@
           </article>
         </div>
         <!-- 公共分页 开始 -->
-        <div>
-          <div class="paging">
-            <!-- undisable这个class是否存在，取决于数据属性hasPrevious -->
-            <a href="#" title="首页">首</a>
-            <a href="#" title="前一页">&lt;</a>
-            <a href="#" title="第1页" class="current undisable">1</a>
-            <a href="#" title="第2页">2</a>
-            <a href="#" title="后一页">&gt;</a>
-            <a href="#" title="末页">末</a>
-            <div class="clear"></div>
-          </div>
-        </div>
+       <!-- 公共分页 开始 -->
+<div>
+  <div class="paging">
+    <!-- undisable这个class是否存在，取决于数据属性hasPrevious -->
+    <a
+      :class="{undisable: !data.hasPrevious}"
+      href="#"
+      title="首页"
+      @click.prevent="gotoPage(1)">首</a>
+    <a
+      :class="{undisable: !data.hasPrevious}"
+      href="#"
+      title="前一页"
+      @click.prevent="gotoPage(data.current-1)">&lt;</a>
+    <a
+      v-for="page in data.pages"
+      :key="page"
+      :class="{current: data.current == page, undisable: data.current == page}"
+      :title="'第'+page+'页'"
+      href="#"
+      @click.prevent="gotoPage(page)">{{ page }}</a>
+    <a
+      :class="{undisable: !data.hasNext}"
+      href="#"
+      v-if="data.current+1<= data.pages"
+      title="后一页"
+      @click.prevent="gotoPage(data.current+1)">&gt;</a>
+    <a
+      :class="{undisable: !data.hasNext}"
+      href="#"
+      title="末页"
+      @click.prevent="gotoPage(data.pages)">末</a>
+    <div class="clear"/>
+  </div>
+</div>
+<!-- 公共分页 结束 -->
         <!-- 公共分页 结束 -->
       </section>
     </section>
@@ -80,7 +104,7 @@ export default {
   // 取路由中的值
   asyncData({params,error}){
     // 这种写法return 不能少 return后面不能换行
-    return teacherApi.getTeacherList(1,8)
+    return teacherApi.getTeacherList(1,4)
       .then(response =>{
         console.log(response.data.data);
         // 等于赋值给上面的变量data
@@ -88,6 +112,16 @@ export default {
           return {data:response.data.data}
       })
 
+  },
+  
+  methods:{
+    // 分页换页
+    gotoPage(page){
+      teacherApi.getTeacherList(page,4)
+      .then(response =>{
+            this.data = response.data.data
+        })
+    }
   }
 };
 </script>
