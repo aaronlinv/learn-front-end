@@ -7,5 +7,13 @@ export default {
       url: `/eduservice/teacherfront/getTeacherFrontList/${page}/${limit}`,
       method: 'post'
     })
+  },
+
+  // 查询讲师基本信息和课程
+  getTeacherInfo(teacherId) {
+    return request({
+      url: `/eduservice/teacherfront/getTeacherFrontInfo/${teacherId}`,
+      method: 'get'
+    })
   }
 }
