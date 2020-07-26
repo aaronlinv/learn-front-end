@@ -19,8 +19,8 @@
                   <a title="全部" href="#">全部</a>
                 </li>
                 <!-- 使用index -->
-                <li v-for="(item,index) in subjectNestedList" :key="index">
-                  <a title="数据库" href="#">{{item.title}}</a>
+                <li v-for="(item,index) in subjectNestedList" :key="index"  :class="{active:oneIndex==index}"> 
+                  <a :title="item.title" href="#" @click="searchOne(item.id,index)">{{item.title}}</a>
                 </li>
 
               </ul>
@@ -33,7 +33,7 @@
             <dd class="c-s-dl-li">
               <ul class="clearfix">
                 <li v-for="(item,index) in subSubjectList" :key="index">
-                  <a title="职称英语" href="#">{{item.title}}</a>
+                  <a :title="item.title" href="#">{{item.title}}</a>
                 </li>
                 
               </ul>
@@ -174,6 +174,33 @@ export default {
     this.initSubjdct()
   },
   methods:{
+    
+    // 二级联动
+    // 点击某个一级分类
+    searchOne(subjectParentId,index){
+      // 设置上选中项的背景
+      this.oneIndex = index
+      
+
+      // 清空二级的数据
+      this.twoIndex = -1
+      this.searchObj.subjectId = ""
+      this.subSubjectList = []
+
+
+      // 设置查询的一级分类
+      this.searchObj.subjectParentId = subjectParentId
+      // 查询第一页
+      this.gotoPage(1)
+
+      for(let i = 0;i <this.subjectNestedList.length;i++){
+        var oneSubject = this.subjectNestedList[i]
+        if(subjectParentId == oneSubject.id  ){
+          this.subSubjectList =  oneSubject.children 
+        }
+      }
+
+    },
     // 初始化第一页
     initCourseFirst(){
         courseApi.getCourseList(1,8,this.searchObj)
@@ -200,3 +227,16 @@ export default {
   }
 };
 </script>
+
+
+<style scoped>
+  .active {
+    background: #bdbdbd;
+  }
+  .hide {
+    display: none;
+  }
+  .show {
+    display: block;
+  }
+</style>
