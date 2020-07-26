@@ -26,14 +26,15 @@
               </ul>
             </dd>
           </dl>
+          <!-- 二级分类 -->
           <dl>
             <dt>
               <span class="c-999 fsize14"></span>
             </dt>
             <dd class="c-s-dl-li">
               <ul class="clearfix">
-                <li v-for="(item,index) in subSubjectList" :key="index">
-                  <a :title="item.title" href="#">{{item.title}}</a>
+                <li v-for="(item,index) in subSubjectList" :key="index" :class="{active:twoIndex==index}">
+                  <a :title="item.title" href="#" @click="searchTwo(item.id,index)">{{item.title}}</a>
                 </li>
                 
               </ul>
@@ -50,15 +51,19 @@
           </section>
           <section class="fl">
             <ol class="js-tap clearfix">
-              <li>
-                <a title="关注度" href="#">关注度</a>
+              <li :class="{'current bg-orange':buyCountSort!=''}">
+                <a title="销量" href="javascript:void(0);" @click="searchBuyCount()">销量
+                <span :class="{hide:buyCountSort==''}">↓</span>
+                </a>
               </li>
-              <li>
-                <a title="最新" href="#">最新</a>
+              <li :class="{'current bg-orange':gmtCreateSort!=''}">
+                <a title="最新" href="javascript:void(0);" @click="searchGmtCreate()">最新
+                <span :class="{hide:gmtCreateSort==''}">↓</span>
+                </a>
               </li>
-              <li class="current bg-orange">
-                <a title="价格" href="#">价格&nbsp;
-                  <span>↓</span>
+              <li :class="{'current bg-orange':priceSort!=''}">
+                <a title="价格" href="javascript:void(0);" @click="searchPrice()">价格&nbsp;
+                  <span :class="{hide:priceSort==''}">↓</span>
                 </a>
               </li>
             </ol>
@@ -174,7 +179,51 @@ export default {
     this.initSubjdct()
   },
   methods:{
-    
+    // 根据销量排序
+    searchBuyCount(){
+        this.buyCountSort = "1"
+        this.gmtCreateSort = ""
+        this.priceSort = ""
+
+        this.searchObj.buyCountSort = this.buyCountSort
+        this.searchObj.gmtCreateSort = this.gmtCreateSort;
+        this.searchObj.priceSort = this.priceSort;
+        this.gotoPage(this.page)
+    },
+    // 根据价格排序
+    searchPrice(){
+        this.buyCountSort = ""
+        this.gmtCreateSort = ""
+        this.priceSort = "1"
+
+        this.searchObj.buyCountSort = this.buyCountSort
+        this.searchObj.gmtCreateSort = this.gmtCreateSort;
+        this.searchObj.priceSort = this.priceSort;
+        this.gotoPage(this.page)
+    },
+
+    // 根据时间排序
+    searchGmtCreate(){
+        this.buyCountSort = ""
+        this.gmtCreateSort = "1"
+        this.priceSort = ""
+
+        this.searchObj.buyCountSort = this.buyCountSort
+        this.searchObj.gmtCreateSort = this.gmtCreateSort;
+        this.searchObj.priceSort = this.priceSort;
+        this.gotoPage(this.page)
+    },
+
+    // 二级分类
+    searchTwo(subjectId,index){
+        this.twoIndex = index
+        
+        // 查询条件
+        this.searchObj.subjectId = subjectId
+        this.gotoPage(1)
+
+    },
+
     // 二级联动
     // 点击某个一级分类
     searchOne(subjectParentId,index){
