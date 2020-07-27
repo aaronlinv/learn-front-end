@@ -45,6 +45,38 @@ export default {
                 }
                 
             })
+    },data(){
+        return {
+            timer1:''
+        }
+        
+    },
+    // 每3s 查询一次支付情况
+    mounted(){
+        this.timer1 = setInterval(()=>{
+            this.queryOrderStatus(this.payObj.out_trade_no)
+        },3000)
+    },
+    methods:{
+        queryOrderStatus(orderNO){
+            ordersApi.queryPayStatus(orderNO)
+                .then(response =>{
+                     if (response.data.success) {
+                            // 支付成功清除定时器
+                    clearInterval(this.timer1)
+
+                    this.$message({
+                        type: 'success',
+                        message: '支付成功!'
+                  })
+                  //跳转到课程详情页面观看视频
+                     this.$router.push({path: '/course/' + this.payObj.course_id})
+               
+
+
+                     }
+                     })
+        }
     }
 }
 </script>
