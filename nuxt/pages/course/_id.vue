@@ -33,9 +33,14 @@
                 <a class="c-fff vam" title="收藏" href="#" >收藏</a>
               </span>
             </section>
-            <section class="c-attr-mt">
+            <section class="c-attr-mt" v-if="Number(courseWebVo.price)===0">
+              <a href="#" title="立即观看" class="comm-btn c-btn-3" @click="createOrders()">立即观看</a>
+            </section>
+
+            <section class="c-attr-mt" v-else>
               <a href="#" title="立即购买" class="comm-btn c-btn-3" @click="createOrders()">立即购买</a>
             </section>
+
           </section>
         </aside>
         <aside class="thr-attr-box">
