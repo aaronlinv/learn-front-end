@@ -33,8 +33,8 @@
                 <a class="c-fff vam" title="收藏" href="#" >收藏</a>
               </span>
             </section>
-            <section class="c-attr-mt" v-if="Number(courseWebVo.price)===0">
-              <a href="#" title="立即观看" class="comm-btn c-btn-3" @click="createOrders()">立即观看</a>
+            <section class="c-attr-mt" v-if="isBuy||Number(courseWebVo.price)===0">
+              <a href="#" title="立即观看" class="comm-btn c-btn-3 ">立即观看</a>
             </section>
 
             <section class="c-attr-mt" v-else>
@@ -255,14 +255,7 @@ import commentApi from '@/api/commonedu'
 import ordersApi from '@/api/orders'
 export default {
   asyncData({params,error}){
-      return courseApi.getCourseInfo(params.id)
-        .then(response =>{
-          return {
-            courseWebVo:response.data.data.courseWebVo,
-             chapterVideoList:response.data.data.chapterVideoList
-
-          }
-        })
+      return {courseId:params.id}
   },
   // asyncData({ params, error }) {
   //   return {courseId: params.id}  
@@ -280,14 +273,34 @@ export default {
       courseInfo:{},
       chapterVideoList:[],
       isbuyCourse:false,
-      courseId:''
+      courseId:'',
+      courseWebVo:{},
+      
+      isBuy:false
+
+
+      
     }
   },  created() {
     // this.initCourseInfo()
     this.courseId = this.$route.params.id
-    console.log(this.courseId)
+    console.log("courseId == >"+this.courseId)
+    this.initCourseInfo() 
     this.initComment()
   },methods:{
+    // 查询课程详情信息
+    initCourseInfo(){
+        courseApi.getCourseInfo(this.courseId)
+        .then(response =>{
+          
+            this.courseWebVo=response.data.data.courseWebVo,
+             this.chapterVideoList=response.data.data.chapterVideoList,
+             console.log("response == >"+response)
+             this.isBuy = response.data.data.isBuy
+
+      
+        })
+    },
     // 生成订单
     createOrders(){
         ordersApi.createOrders(this.courseId)
