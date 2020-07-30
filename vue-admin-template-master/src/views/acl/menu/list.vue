@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-input v-model="filterText" placeholder="Filter keyword" style="margin-bottom:30px;"/>
 
-
+<!-- 需要替换element-ui 依赖文件 否则表格效果不显示-->
     <el-table
       :data="menuList"
       style="width: 100%;margin-bottom: 20px;"
