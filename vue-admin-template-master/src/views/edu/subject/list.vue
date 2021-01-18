@@ -46,11 +46,11 @@ created(){
         
     },
     filterNode(value, data) {
-      if (!value) return true
+      if (!value.trim()) return true
       // 搜索不区分大小写
       
     //   return data.title.indexOf(value) !== -1
-      return data.title.toLowerCase().indexOf(value.toLowerCase()) !== -1
+      return data.title.trim().toLowerCase().indexOf(value.trim().toLowerCase()) !== -1
     }
   }
 }
