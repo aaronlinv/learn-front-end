@@ -2,10 +2,10 @@
   <div class="app-container">
     <el-form label-width="120px">
       <el-form-item label="信息描述">
-        <el-tag type="info">excel模版说明</el-tag>
+        <el-tag type="info">使用Excel定义课程分类列表</el-tag>
         <el-tag>
           <i class="el-icon-download"/>
-          <a :href="'/static/01.xls'">点击下载模版</a>
+          <a :href="'/static/subject_template.xls'">点击下载模版</a>
         </el-tag>
 
       </el-form-item>
@@ -74,7 +74,7 @@ export default {
                     message: response.message
                 })
                 // 路由跳转到课程分类界面
-                this.$router.push({path:'/subject/list'})
+                this.$router.push({path:'/edu/subject/list'})
     } 
         },
         // 上传失败
