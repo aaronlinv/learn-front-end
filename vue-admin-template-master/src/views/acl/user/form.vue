@@ -9,7 +9,7 @@
       </el-form-item>
      
       <el-form-item v-if="!user.id" label="用户密码" prop="password">
-        <el-input v-model="user.password"/>
+        <el-input v-model="user.password" type="password"/>
       </el-form-item>
 
 
