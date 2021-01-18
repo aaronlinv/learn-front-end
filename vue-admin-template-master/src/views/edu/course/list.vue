@@ -1,6 +1,5 @@
 <template>
   <div class="app-container">
-    列表
     <!--查询表单-->
     <el-form :inline="true" class="demo-form-inline">
       <el-form-item>
@@ -48,34 +47,34 @@
       fit
       highlight-current-row
     >
-      <el-table-column label="序号" width="70" align="center">
+      <el-table-column label="序号" width="50" align="center">
         <template slot-scope="scope">{{ (page - 1) * limit + scope.$index + 1 }}</template>
       </el-table-column>
 
-      <el-table-column prop="title" label="课程名称" width="80" />
+      <el-table-column prop="title" label="课程名称"  />
 
-      <el-table-column label="课程状态" width="80">
+      <el-table-column label="课程状态" width="100">
         <template slot-scope="scope">{{ scope.row.status==='Normal'?'已发布':'未发布' }}</template>
       </el-table-column>
 
-      <el-table-column prop="lessonNum" label="课时数" />
+      <el-table-column prop="lessonNum" label="课时数"  width="100"/>
 
-      <el-table-column prop="gmtCreate" label="添加时间" width="160" />
+      <el-table-column prop="gmtCreate" label="添加时间" width="180" />
 
-      <el-table-column prop="viewCount" label="浏览数量" width="60" />
+      <el-table-column prop="viewCount" label="浏览数量" width="50" />
 
       <el-table-column label="操作" width="200" align="center">
         <template slot-scope="scope">
           <router-link :to="'/teacher/edit/'+scope.row.id">
-            <el-button type="primary" size="mini" icon="el-icon-edit">编辑基本信息</el-button>
+            <el-button class="btn" type="primary" size="mini" icon="el-icon-edit">编辑基本信息</el-button>
           </router-link>
 
         <router-link :to="'/teacher/edit/'+scope.row.id">
-            <el-button type="primary" size="mini" icon="el-icon-edit">编辑大纲信息</el-button>
+            <el-button class="btn" type="primary" size="mini" icon="el-icon-edit">编辑大纲信息</el-button>
           </router-link>
 
           <!-- scope.row.id 传递讲师id -->
-          <el-button type="danger" size="mini" icon="el-icon-delete"
+          <el-button class="btn" type="danger" size="mini" icon="el-icon-delete"
             @click="removeDataById(scope.row.id)" >删除课程信息</el-button>
         </template>
       </el-table-column>
@@ -167,10 +166,15 @@ export default {
             // 2. 查询所有讲师信息
             this.getList()
         },
-       
     }
 
 }
 </script>
 
 
+<style  scoped>
+.btn {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+</style>
