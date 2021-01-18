@@ -3,7 +3,7 @@
     <!--查询表单-->
     <el-form :inline="true" class="demo-form-inline">
       <el-form-item>
-        <el-input v-model="courseQuery.name" placeholder="课程名称" />
+        <el-input v-model="courseQuery.title" placeholder="课程名称" />
       </el-form-item>
 
       <el-form-item>
@@ -13,9 +13,9 @@
         </el-select>
       </el-form-item>
 
-      <!-- <el-form-item label="添加时间">
+      <el-form-item >
         <el-date-picker
-          v-model="teacherQuery.begin"
+          v-model="courseQuery.begin"
           type="datetime"
           placeholder="选择开始时间"
           value-format="yyyy-MM-dd HH:mm:ss"
@@ -24,15 +24,15 @@
       </el-form-item>
       <el-form-item>
         <el-date-picker
-          v-model="teacherQuery.end"
+          v-model="courseQuery.end"
           type="datetime"
           placeholder="选择截止时间"
           value-format="yyyy-MM-dd HH:mm:ss"
           default-time="00:00:00"
         />
-      </el-form-item> -->
+      </el-form-item>
 
-      <el-button type="primary" icon="el-icon-search" @click="getList()">查询</el-button>
+      <el-button type="primary" icon="el-icon-search" @click="getPageList()">查询</el-button>
       <el-button type="default" @click="resetData()">清空</el-button>
     </el-form>
 
@@ -90,7 +90,7 @@
       :total="total"
       style="padding: 30px 0; text-align: center;"
       layout="total, prev, pager, next, jumper"
-      @current-change="getList"
+      @current-change="getPageList"
     />
   </div>
 </template>
@@ -113,7 +113,7 @@ export default {
             list: null,
 
             page: 1,
-            limit: 3,
+            limit: 10,
             // 总记录数
             total: 0,
 
@@ -124,7 +124,7 @@ export default {
         }
     },
     created(){ // 3.页面渲染前执行，一般调用methods方法
-        this.getList()
+        this.getPageList()
     },
     methods:{ 
         removeDataById(id){
@@ -141,13 +141,13 @@ export default {
                             message: '删除成功!'
                         });
                         // 2.回到列表，需要刷新
-                        this.getList()
+                        this.getPageList()
 
                     })
             })
         },
         
-        // 讲师列表
+        // 获取全部讲师列表
         getList(){
             course.getListCourse()
             .then(response => {
@@ -160,11 +160,35 @@ export default {
                 console.log(error)
             })
         },
+        // 获取分页讲师列表
+        getPageList(page = 1){
+          console.log("getPageList~~")
+          console.log("page == >"+this.page)
+          console.log("limit == >"+this.limit)
+          console.log("courseQuery.title == >"+this.courseQuery.title)
+          console.log("courseQuery.status == >"+this.courseQuery.status)
+          console.log("courseQuery.begin == >"+this.courseQuery.begin)
+          console.log("courseQuery.end == >"+this.courseQuery.end)
+          
+            this.page = page
+            course.getCourseListPage(this.page,this.limit,this.courseQuery)
+            .then(response => {
+                console.log("response == >")
+                console.log(response)
+                this.list = response.data.rows
+                this.total = response.data.total
+                console.log(this.list)
+                console.log(this.total)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        },
         resetData(){ // 清空表单
             // 1.表单内容清空
             this.courseQuery = {}
             // 2. 查询所有讲师信息
-            this.getList()
+            this.getPageList()
         },
     }
 
@@ -174,7 +198,8 @@ export default {
 
 <style  scoped>
 .btn {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
+
 </style>
