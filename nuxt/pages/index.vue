@@ -128,7 +128,8 @@ export default {
       swiperOption: {
         //配置分页
         pagination: {
-          el: '.swiper-pagination'//分页的dom节点
+          el: '.swiper-pagination',//分页的dom节点
+          clickable :true,
         },
         //配置导航
         navigation: {
