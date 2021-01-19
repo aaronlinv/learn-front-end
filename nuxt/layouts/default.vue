@@ -69,8 +69,8 @@
           <aside class="h-r-search">
             <form action="#" method="post">
               <label class="h-r-s-box">
-                <input type="text" placeholder="输入你想学的课程" name="queryCourse.courseName" value>
-                <button type="submit" class="s-btn">
+                <input type="text" placeholder="输入你想学的课程" v-model="courseName" name="courseName" value>
+                <button type="input" class="s-btn" @click.prevent="search()">
                   <em class="icon18">&nbsp;</em>
                 </button>
               </label>
@@ -164,7 +164,7 @@ export default {
         mobile: '',
         nickname: '',
         sex: ''
-      }
+      },courseName:''
     }
     
   },
@@ -211,6 +211,16 @@ export default {
           if(userStr){
             this.loginInfo = JSON.parse(userStr)
           }
+      },
+
+      search(){
+        console.log("点击查询 == >"+this.courseName)
+        this.$router.push({
+          path: '/course',
+          query: {
+            courseName: this.courseName
+          }
+})
       }
   }
 

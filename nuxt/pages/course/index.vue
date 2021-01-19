@@ -175,6 +175,7 @@ export default {
     }
   },
   created(){
+    console.log("$route.query.id == >"+ this.$route.query.id)
     this.initCourseFirst()
     this.initSubjdct()
   },
