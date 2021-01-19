@@ -7,7 +7,7 @@
 <div v-swiper:mySwiper="swiperOption">
     <div class="swiper-wrapper">
         <div v-for="banner in bannerList" :key="banner.id" class="swiper-slide" style="background: #040B1B;">
-            <a target="_blank" href="/">
+            <a target="_blank" :href="banner.linkUrl">
                 <img :src="banner.imageUrl" :alt="banner.title"  >
             </a>
         </div>
@@ -128,6 +128,10 @@ export default {
   data () {
     return {
       swiperOption: {
+        autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+        },
         //配置分页
         pagination: {
           el: '.swiper-pagination',//分页的dom节点

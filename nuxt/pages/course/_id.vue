@@ -159,10 +159,22 @@
           </div>
         </aside>
         <div class="clear"></div>
+
+
+        
       </div>
     </section>
+
+
+    <section class="container comment ">
+    <div class="mt20 c-infor-box">
+    <article class="fl col-7">
+       <section class="mr30">
+      <div class="i-box">
     <!-- /课程详情 结束 -->
     <div class="mt20 commentHtml"><div>
+
+
       <h6 class="c-c-content c-infor-title" id="i-art-comment">
         <span class="commentTitle">课程评论</span>
       </h6>
@@ -246,6 +258,12 @@
         <!-- 公共分页 结束 -->
       </div>
     </div>
+
+      </div>
+       </section>
+    </article>
+    </div>
+  </section>
   </div>
 </template>
 
@@ -345,3 +363,9 @@ export default {
 
 };
 </script>
+
+<style scoped>
+.comment {
+  padding-top: 10px ;
+}
+</style>
