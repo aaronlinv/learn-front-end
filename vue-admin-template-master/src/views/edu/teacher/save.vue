@@ -1,6 +1,5 @@
 <template>
   <div class="app-container">
-    讲师添加
     <el-form label-width="120px">
       <el-form-item label="讲师名称">
         <el-input v-model="teacher.name"/>
