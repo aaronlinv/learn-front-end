@@ -155,11 +155,14 @@ export default {
     console.log('chapter created')
     // 获取路由的 课程 id值
     // 有值
+    console.log("路由参数 == >"+this.$route.params.id)
     if(this.$route.params && this.$route.params.id){
-        this.courseId = this.$route.params.id
+      this.courseId = this.$route.params.id
         // 根据课程id查询章节和小节
-         this.getChapterVideo()
+        this.getChapterVideo()
     }
+      console.log("courseId == >"+this.courseId)
+    
   
     
   },
@@ -280,7 +283,7 @@ export default {
                             message: '删除成功!'
                         });
                         // 2.回到列表，需要刷新
-                                 this.getChapterVideo()
+                                this.getChapterVideo()
 
                     })
             })
@@ -303,15 +306,22 @@ export default {
     openChapterDialog(){
         this.dialogChapterFormVisible =true
         // 清空数据残留
+        this.chapter.courseId =''
         this.chapter.title =''
         this.chapter.sort = 0
+        console.log("1.清空数据")
+        console.log(this.chapter)
     },
     // 添加章节
     addChapter(){
+      console.log("添加章节 == >")
+      console.log(this.chapter)
+      console.log("添加章节 <==")
+        // 设置课程id
+            this.chapter.courseId = this.courseId
       chapter.addChapter(this.chapter)
           .then(response =>{
-            // 设置课程id
-            this.chapter.courseId = this.courseId
+          
             // 关闭窗口 提示信息 刷新数据
             this.dialogChapterFormVisible=false
             this.$message({
@@ -336,7 +346,11 @@ export default {
     },
 
     saveOrUpdate(){
-      //
+      // 
+      
+      console.log("2. saveOrUpdate  this.chapter== >")
+      console.log(this.chapter)
+
       if(!this.chapter.id){
         this.addChapter()
       }else{
@@ -347,6 +361,8 @@ export default {
     getChapterVideo(){
         chapter.getAllChapterVideo(this.courseId)
           .then(response => {
+              console.log("getAllChapterVideo == >")
+              console.log(response)
               this.chapterVideoList = response.data.allChapterVideo
           })
     },
@@ -354,12 +370,12 @@ export default {
 
     previous() {
       console.log('previous')
-      this.$router.push({ path: '/course/info/'+this.courseId })
+      this.$router.push({ path: '/edu/course/info/'+this.courseId })
     },
 
     next() {
       console.log('next')
-      this.$router.push({ path: '/course/publish/'+this.courseId })
+      this.$router.push({ path: '/edu/course/publish/'+this.courseId })
     }
   }
 }

@@ -66,11 +66,11 @@
 
       <el-table-column label="操作" width="200" align="center">
         <template slot-scope="scope">
-          <router-link :to="'/teacher/edit/'+scope.row.id">
+          <router-link :to="'/coures/edit/'+scope.row.id">
             <el-button class="btn" type="primary" size="mini" icon="el-icon-edit">编辑基本信息</el-button>
           </router-link>
 
-        <router-link :to="'/teacher/edit/'+scope.row.id">
+        <router-link :to="'/course/edit/'+scope.row.id">
             <el-button class="btn" type="primary" size="mini" icon="el-icon-edit">编辑大纲信息</el-button>
           </router-link>
 

@@ -79,7 +79,7 @@
 
 
 <!-- 课程封面-->
-<el-form-item label="课程封面">
+<el-form-item label="课程封面" >
     <!-- show-file-list 不显示上传列表 -->
   <el-upload
   
@@ -88,7 +88,7 @@
     :before-upload="beforeAvatarUpload"
     :action="BASE_API+'/eduoss/fileoss'"
     class="avatar-uploader">
-    <img :src="courseInfo.cover">
+    <img :src="courseInfo.cover" class="avatar-img">
   </el-upload>
 
 </el-form-item>
@@ -196,6 +196,8 @@ export default {
             course.getCourseInfo(this.courseId)
                 .then(response =>{
                     this.courseInfo = response.data.courseInfoVo
+                    console.log("根据课程id 查询到的课程 == >")
+                    console.log(this.courseInfo)
                 })
         },
         // 上传成功
@@ -267,7 +269,7 @@ export default {
                             message: '添加课程信息成功!'});
                     // 跳转下一步
                     // 后端response 返回id
-                    this.$router.push({path:`/course/chapter/${response.data.courseId}`})
+                    this.$router.push({path:`/edu/course/chapter/${response.data.courseId}`})
                 })
           
         },
@@ -281,7 +283,7 @@ export default {
                             message: '修改课程信息成功!'});
                     // 跳转下一步
                     // 修改后端不会返回id 注意
-                    this.$router.push({path:`/course/chapter/${this.courseId}`})
+                    this.$router.push({path:`/edu/course/chapter/${this.courseId}`})
                 })
             
         },
@@ -306,5 +308,10 @@ export default {
 /*  scoped 表示当前页面有效 */
 .tinymce-container {
   line-height: 29px;
+}
+
+.avatar-img {
+    /* width: 200px; */
+    height: 200px;
 }
 </style>

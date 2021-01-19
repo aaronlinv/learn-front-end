@@ -62,7 +62,7 @@ export default {
 
     previous() {
       console.log('previous')
-      this.$router.push({ path: '/course/chapter/'+this.courseId })
+      this.$router.push({ path: '/edu/course/chapter/'+this.courseId })
     },
 
     publish() {
@@ -73,7 +73,7 @@ export default {
               message: '课程发布成功!'})
               
             // 跳转
-            this.$router.push({ path: '/course/list' })
+            this.$router.push({ path: '/edu/course/list' })
         })
       
     }

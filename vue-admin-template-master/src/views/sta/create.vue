@@ -44,7 +44,7 @@ export default {
                         message: '生成成功'
                     })
                     // 跳转页面
-                    this.$router.push({path:'/sta/show'})
+                    this.$router.push({path:'/edu/sta/chart'})
                 })
         }
     }
