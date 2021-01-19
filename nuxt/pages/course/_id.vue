@@ -34,7 +34,7 @@
               </span>
             </section>
             <section class="c-attr-mt" v-if="isBuy||Number(courseWebVo.price)===0">
-              <a href="#" title="立即观看" class="comm-btn c-btn-3 ">立即观看</a>
+              <a href="#course" title="立即观看" class="comm-btn c-btn-3 ">立即观看</a>
             </section>
 
             <section class="c-attr-mt" v-else>
@@ -74,7 +74,7 @@
         <div class="clear"></div>
       </div>
       <!-- /课程封面介绍 -->
-      <div class="mt20 c-infor-box">
+      <div class="mt20 c-infor-box" id="course">
         <article class="fl col-7">
           <section class="mr30">
             <div class="i-box">
@@ -162,7 +162,7 @@
       </div>
     </section>
     <!-- /课程详情 结束 -->
-    <div class="mt50 commentHtml"><div>
+    <div class="mt20 commentHtml"><div>
       <h6 class="c-c-content c-infor-title" id="i-art-comment">
         <span class="commentTitle">课程评论</span>
       </h6>
