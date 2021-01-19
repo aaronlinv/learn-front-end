@@ -3,11 +3,12 @@
   <div>
     <!-- 幻灯片 开始 -->
     <!-- 幻灯片 开始 -->
+    <section class="container">
 <div v-swiper:mySwiper="swiperOption">
     <div class="swiper-wrapper">
         <div v-for="banner in bannerList" :key="banner.id" class="swiper-slide" style="background: #040B1B;">
             <a target="_blank" href="/">
-                <img :src="banner.imageUrl" :alt="banner.title">
+                <img :src="banner.imageUrl" :alt="banner.title"  >
             </a>
         </div>
 
@@ -16,6 +17,7 @@
     <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
     <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
 </div>
+    </section>
 <!-- 幻灯片 结束 -->
     <!-- 幻灯片 结束 -->
     

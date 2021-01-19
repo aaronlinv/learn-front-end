@@ -4,8 +4,8 @@
     <header id="header">
       <section class="container">
         <h1 id="logo">
-          <a href="#" title="谷粒学院">
-            <img src="~/assets/img/logo.png" width="100%" alt="谷粒学院">
+          <a href="#" title="橙汁学院">
+            <img src="~/assets/img/logo.png" width="100%" alt="橙汁学院">
           </a>
         </h1>
         <div class="h-r-nsl">
@@ -19,16 +19,14 @@
             <router-link to="/teacher" tag="li" active-class="current">
               <a>名师</a>
             </router-link>
-            <router-link to="/article" tag="li" active-class="current">
+            <!-- <router-link to="/article" tag="li" active-class="current">
               <a>文章</a>
             </router-link>
             <router-link to="/qa" tag="li" active-class="current">
               <a>问答</a>
-            </router-link>
+            </router-link> -->
           </ul>
           <!-- / nav -->
-
-
 
 <!-- / nav -->
           <ul class="h-r-login">
@@ -43,12 +41,12 @@
                       <span class="vam ml5">注册</span>
                   </a>
               </li>
-              <li v-if="loginInfo.id" id="is-login-one" class="mr10">
+              <!-- <li v-if="loginInfo.id" id="is-login-one" class="mr10">
                   <a id="headerMsgCountId" href="#" title="消息">
                       <em class="icon18 news-icon">&nbsp;</em>
                   </a>
                   <q class="red-point" style="display: none">&nbsp;</q>
-              </li>
+              </li> -->
               <li v-if="loginInfo.id" id="is-login-two" class="h-r-user">
                   <a href="/ucenter" title>
                       <img
@@ -98,7 +96,7 @@
           </h4>
           <ul class="of flink-list">
             <li>
-              <a href="http://www.atguigu.com/" title="尚硅谷" target="_blank">尚硅谷</a>
+              <a href="https://www.icourse163.org/" title="中国大学慕课" target="_blank">中国大学慕课</a>
             </li>
           </ul>
           <div class="clear"></div>
@@ -111,11 +109,11 @@
                 <a href="#" title="联系我们" target="_blank">联系我们</a>|
                 <a href="#" title="帮助中心" target="_blank">帮助中心</a>|
                 <a href="#" title="资源下载" target="_blank">资源下载</a>|
-                <span>服务热线：010-56253825(北京) 0755-85293825(深圳)</span>
-                <span>Email：info@atguigu.com</span>
+                <span>服务热线：010-85293833</span>
+                <span>Email：info@juice.com</span>
               </section>
               <section class="b-f-link mt10">
-                <span>©2018课程版权均归谷粒学院所有 京ICP备17055252号</span>
+                <span>©2021版权均归橙汁学院所有</span>
               </section>
             </section>
           </section>
@@ -218,3 +216,10 @@ export default {
 
 };
 </script>
+
+<style scoped>
+  .router-link{
+    width: 200px;
+  }
+
+</style>
