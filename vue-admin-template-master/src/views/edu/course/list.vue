@@ -8,8 +8,9 @@
 
       <el-form-item>
         <el-select v-model="courseQuery.status" clearable placeholder="课程状态">
-          <el-option :value="Normal" label="已发布" />
-          <el-option :value="Draft" label="未发布" />
+          <el-option value="" label="全选中" />
+          <el-option value="Normal" label="已发布" />
+          <el-option value="Draft" label="未发布" />
         </el-select>
       </el-form-item>
 
