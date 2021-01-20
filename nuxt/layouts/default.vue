@@ -215,7 +215,7 @@ export default {
 
       search(){
         console.log("点击查询 == >"+this.courseName)
-        this.$router.push({
+        this.$router.replace({
           path: '/course',
           query: {
             courseName: this.courseName

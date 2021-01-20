@@ -295,8 +295,18 @@ export default {
 
       this.searchBuyCount()
     }
-
-
+  },watch: {
+  // 利用watch方法检测路由变化：
+  // 变化了就刷新课程列表
+　　'$route': function (to, from) {
+　　　　// 可以拿到目标参数 to.query.id 去再次请求数据接口
+    console.log("router to.query.courseName == >"+to.query.courseName)
+    if(to.query.courseName!==this.courseName){
+      this.courseName = to.query.courseName
+      this.searchObj.queryCourse = to.query.courseName
+      this.searchBuyCount()
+      }
+　　}
   }
 };
 </script>
