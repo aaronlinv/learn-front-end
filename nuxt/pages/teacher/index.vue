@@ -27,7 +27,7 @@
                 <section class="i-teach-wrap">
                   <div class="i-teach-pic">
                     <a :href="'/teacher/'+teacher.id" :title="teacher.name" target="_blank">
-                      <img :src="teacher.avatar" :alt="teacher.name">
+                      <img :src="teacher.avatar" :alt="teacher.name" class="avatar">
                     </a>
                   </div>
                   <div class="mt10 hLh30 txtOf tac">
@@ -125,3 +125,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.avatar {
+  width: 140px;
+  height: 140px;
+}
+</style>
