@@ -183,11 +183,15 @@ export default {
 
     console.log("$route.query.courseName == >"+ queryCourse)
     
-    this.searchObj.queryCourse = queryCourse.trim()
-
-
-    this.initCourseFirst()
+    
     this.initSubjdct()
+
+    if(queryCourse){
+      this.searchObj.queryCourse = queryCourse.trim()
+    }
+      this.searchBuyCount()
+      // this.initCourseFirst()
+    
   },
   methods:{
     // 根据销量排序
@@ -266,6 +270,8 @@ export default {
         courseApi.getCourseList(1,8,this.searchObj)
           .then(response =>{
             this.data = response.data.data
+            console.log(" 初始化第一页===>")
+            console.log(response)
           })
     },
     // 查询分类 一级分类初始化
@@ -284,10 +290,12 @@ export default {
     },
     searchAll(){
       this.oneIndex =-1
-      this.searchObj.queryCourse = ""
+      this.searchObj = {
+        title:""
+      }
       this.subSubjectList =[]
-          this.initCourseFirst()
-    this.initSubjdct()
+
+      this.searchBuyCount()
     }
 
 

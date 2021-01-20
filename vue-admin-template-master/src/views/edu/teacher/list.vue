@@ -112,7 +112,7 @@ export default {
             list: null,
 
             page: 1,
-            limit: 3,
+            limit: 5,
             // 总记录数
             total: 0,
 
