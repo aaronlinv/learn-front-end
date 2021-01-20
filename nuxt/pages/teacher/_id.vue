@@ -57,7 +57,7 @@
                     </div>
                   </section>
                   <h3 class="hLh30 txtOf mt10">
-                    <a href="#" :title="course.title" target="_blank" class="course-title fsize18 c-333">零基础入门学习Python课程学习</a>
+                    <a :href="'/course/'+course.id" :title="course.title"  class="course-title fsize18 c-333">{{course.title}}</a>
                   </h3>
                 </div>
               </li>
