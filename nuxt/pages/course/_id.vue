@@ -147,7 +147,7 @@
                       </a>
                     </div>
                     <section class="hLh30 txtOf">
-                      <a class="c-333 fsize16 fl" href="#">{{courseWebVo.teacherName}}</a>
+                      <a class="c-333 fsize16 fl" :href="'/teacher/'+courseWebVo.teacherId">{{courseWebVo.teacherName}}</a>
                     </section>
                     <section class="hLh20 txtOf">
                       <span class="c-999">{{courseWebVo.intro}}</span>

@@ -5,9 +5,11 @@
     <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.8.1/skins/default/aliplayer-min.css" >
     <!-- 阿里云视频播放器脚本 -->
     <script charset="utf-8" type="text/javascript" src="https://g.alicdn.com/de/prismplayer/2.8.1/aliplayer-min.js" />
-
+    <section class="container">
     <!-- 定义播放器dom -->
     <div id="J_prismPlayer" class="prism-player" />
+    </section>
+    
   </div>
 </template>
 <script>
