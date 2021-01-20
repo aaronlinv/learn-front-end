@@ -29,12 +29,12 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/edu/course/list',
     name: 'Dashboard',
     children: [{
       path: 'dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '后台管理首页', icon: 'dashboard' }
+      meta: { title: '后台管理首页', icon: 'lock' }
     }]
   }]
 /**

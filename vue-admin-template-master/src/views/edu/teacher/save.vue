@@ -42,8 +42,8 @@
       @crop-upload-success：上传成功后的回调 -->
           <image-cropper
                         v-show="imagecropperShow"
-                        :width="300"
-                        :height="300"
+                        :width="150"
+                        :height="150"
                         :key="imagecropperKey"
                         :url="BASE_API+'/eduoss/fileoss'"
                         field="file"

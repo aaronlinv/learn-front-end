@@ -16,7 +16,7 @@
             <dd class="c-s-dl-li">
               <ul class="clearfix">
                 <li>
-                  <a title="全部" href="#">全部</a>
+                  <a title="全部" href="#" @click="searchAll()" :class="{active:oneIndex == -1 }">全部</a>
                 </li>
                 <!-- 使用index -->
                 <li v-for="(item,index) in subjectNestedList" :key="index"  :class="{active:oneIndex==index}"> 
@@ -163,7 +163,9 @@ export default {
       subjectNestedList: [], // 一级分类列表
       subSubjectList: [], // 二级分类列表
 
-      searchObj: {}, // 查询表单对象
+      searchObj: {
+        queryCourse:""
+      }, // 查询表单对象
       
       // 当前选中的选项
       oneIndex:-1,
@@ -175,7 +177,15 @@ export default {
     }
   },
   created(){
-    console.log("$route.query.id == >"+ this.$route.query.id)
+    // 头部搜索 获取路由地址
+
+    var queryCourse = this.$route.query.courseName
+
+    console.log("$route.query.courseName == >"+ queryCourse)
+    
+    this.searchObj.queryCourse = queryCourse.trim()
+
+
     this.initCourseFirst()
     this.initSubjdct()
   },
@@ -271,6 +281,13 @@ export default {
           .then(response =>{
             this.data = response.data.data
           })
+    },
+    searchAll(){
+      this.oneIndex =-1
+      this.searchObj.queryCourse = ""
+      this.subSubjectList =[]
+          this.initCourseFirst()
+    this.initSubjdct()
     }
 
 
