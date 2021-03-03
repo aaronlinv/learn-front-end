@@ -29,8 +29,8 @@
             </section>
             <section class="c-attr-mt of">
               <span class="ml10 vam">
-                <em class="icon18 scIcon"></em>
-                <a class="c-fff vam" title="收藏" href="#" >收藏</a>
+                <!-- <em class="icon18 scIcon"></em> -->
+                <!-- <a class="c-fff vam" title="收藏" href="#" >收藏</a> -->
               </span>
             </section>
             <section class="c-attr-mt" v-if="isBuy||Number(courseWebVo.price)===0">
@@ -112,9 +112,15 @@
                             </a>
                             <ol class="lh-menu-ol" style="display: block;">
                               <li class="lh-menu-second ml30" v-for="video in chapter.children" :key="video.id">
-                                <a :href="'/player/'+video.videoSourceId" title target="_blank">
+                                <a v-if='video.videoSourceId == "#"' href="#" title >
                                   <span class="fr">
-                                    <i class="free-icon vam mr10">免费试听</i>
+                                    <!-- <i class="free-icon vam mr10">免费试听</i> -->
+                                  </span>
+                                  <em class="lh-menu-i-2 icon16 mr5">&nbsp;</em>{{video.title}}
+                                </a>
+                                <a v-else :href="'/player/'+video.videoSourceId" title >
+                                  <span class="fr">
+                                    <!-- <i class="free-icon vam mr10">免费试听</i> -->
                                   </span>
                                   <em class="lh-menu-i-2 icon16 mr5">&nbsp;</em>{{video.title}}
                                 </a>
@@ -315,7 +321,7 @@ export default {
              this.chapterVideoList=response.data.data.chapterVideoList,
              console.log("response == >"+response)
              this.isBuy = response.data.data.isBuy
-
+          console.log(this.chapterVideoList)
       
         })
     },
