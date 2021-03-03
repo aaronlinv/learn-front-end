@@ -5,10 +5,7 @@
 
       <el-form-item>
         <el-select v-model="searchObj.type" clearable placeholder="请选择">
-          <el-option label="学员登录数统计" value="login_num"/>
           <el-option label="学员注册数统计" value="register_num"/>
-          <el-option label="课程播放数统计" value="video_view_num"/>
-          <el-option label="每日课程数统计" value="course_num"/>
         </el-select>
       </el-form-item>
 
