@@ -44,7 +44,7 @@
           <input type="button" class="sign-up-button" value="注册" @click="submitRegister()">
         </div>
         <p class="sign-up-msg">
-          点击 “注册” 即表示您同意并愿意遵守简书
+          点击 “注册” 即表示您同意并愿意遵守协议
           <br>
           <a target="_blank" href="http://www.jianshu.com/p/c44d171298ce">用户协议</a>
           和
@@ -87,8 +87,20 @@
     methods: {
         // 获取验证码
         getCodeFun(){
+            console.log("开始发送验证码")
+            if(!(/^1[34578]\d{9}$/.test(this.params.mobile))){
+                this.$message({
+                    type: 'error',
+                    message: "手机号码有误"
+                })
+                return;
+            }
             registerApi.sendCode(this.params.mobile)
                 .then(response => {
+                    this.$message({
+                        type: 'info',
+                        message: "短信已发送"
+                    })
                     this.sending = false
                     // 调用倒计时
                     this.timeDown()
@@ -97,8 +109,27 @@
         },
         // 注册
         submitRegister(){
-            registerApi.registerMember(params)
+          let params  = this.params;
+            // 数据校验
+          if (!(/^1[34578]\d{9}$/.test(params.mobile))|| params.code === "" || params.nickname === ""|| params.password === "") {
+            this.$message({
+                type: 'info',
+                message: "信息未填写完整"
+            })
+            return ;
+          }
+
+
+            registerApi.registerMember(this.params)
                 .then(response =>{
+                  console.log("开始注册");
+                  console.log(this.params);
+                  console.log(response);
+                  if(!response){
+                    // 注册失败
+                    this.$router.push({path: '/register'})
+                    return ;
+                  }
                     // 提示成功
                     this.$message({
                         type: 'success',
