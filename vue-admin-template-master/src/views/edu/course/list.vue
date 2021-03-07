@@ -66,13 +66,13 @@
 
       <el-table-column label="操作" width="200" align="center">
         <template slot-scope="scope">
-          <router-link :to="'/coures/edit/'+scope.row.id">
-            <el-button class="btn" type="primary" size="mini" icon="el-icon-edit">编辑基本信息</el-button>
+          <router-link :to="'/edu/course/info/'+scope.row.id">
+            <el-button class="btn" type="primary" size="mini" icon="el-icon-edit">编辑课程信息</el-button>
           </router-link>
-
+<!-- 
         <router-link :to="'/course/edit/'+scope.row.id">
             <el-button class="btn" type="primary" size="mini" icon="el-icon-edit">编辑大纲信息</el-button>
-          </router-link>
+          </router-link> -->
 
           <!-- scope.row.id 传递讲师id -->
           <el-button class="btn" type="danger" size="mini" icon="el-icon-delete"
